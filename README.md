@@ -1,1 +1,1 @@
-## Social Media to share and tattoo photos
+## Social Media to share and save tattoo photos
