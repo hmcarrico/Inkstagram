@@ -1,12 +1,18 @@
 const express = require('express');
 const massive = require('massive');
-require(dotenv).config();
+const session = require('express-session');
+require('dotenv').config();
 //File Imports
 const authController = require('./contollers/authController');
 
 const app = express();
 
 app.use(express.json());
+app.use(session({
+    secret: "mega hyper ultra secret",
+    saveUninitialized: false,
+    resave: false,
+}));
 
 //Auth
 app.post('/register', authController.register);
