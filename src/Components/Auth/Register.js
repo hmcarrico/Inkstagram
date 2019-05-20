@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {updateUser} from '../../ducks/reducer';
 import axios from 'axios';
 
-function Login(){
+function Register(props){
     const [username, inputUsername] = useState('');
     const [password, inputPassword] = useState('');
     const [confirmPassword, reInputPassword] = useState('');
@@ -16,6 +18,13 @@ function Login(){
             alert('Password do not match')
         } else {
             axios.post('/register', user).then(res => {
+                if(res.data.message){
+                    alert(res.data.message)
+                } else if (res.data.user) {
+                    // console.log()
+                    props.updateUser(res.data.user)
+                    props.history.push('/dashbaord')
+                }
                 console.log(res)
             })
         }
@@ -40,4 +49,12 @@ function Login(){
     )
 }
 
-export default withRouter(Login);
+const mapStateToProps = (state) => {
+    return state
+};
+
+const mapDispatchToProps = {
+    updateUser
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register));

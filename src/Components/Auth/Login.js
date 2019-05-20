@@ -1,4 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {updateUser} from '../../ducks/reducer';
 import axios from 'axios';
 
 function Login(props){
@@ -15,11 +18,16 @@ function Login(props){
             if(res.data.message){
                 alert(res.data.message)
             } else if (res.data.user) {
-                console.log('hello')
+                props.updateUser(res.data)
                 props.history.push('/dashboard')
             }
         })
     }
+
+    useEffect(() => {
+        console.log(props.user)
+    //   props.updateUser({hello: 'hello'}
+    }, [props.user])
     
     return (
         <div>
@@ -37,4 +45,12 @@ function Login(props){
     )
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return state
+};
+
+const mapDispatchToProps = {
+    updateUser
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

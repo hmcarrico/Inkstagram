@@ -1,1 +1,1 @@
-SELECT * FROM inked_users WHERE username = $1 LIMIT 1;
+select * from inked_users where username = $1 limit 1;
