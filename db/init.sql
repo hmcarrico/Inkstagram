@@ -29,3 +29,13 @@ create table comments (
     user_id int references inked_users(inked_user_id),
     comment text
 );
+
+insert into posts
+(photo, description)
+values(
+    'https://static1.squarespace.com/static/58aba9754402431f405e2c9e/5ada8df8f2e6b1b27817a74f/5b686d46010685e38a64fd8e/1533570378602/?format=500w',
+    'Who said a pineapple wouldnt make a sweet tattoo?'
+);
+
+select * from inked_users;
+select * from posts;

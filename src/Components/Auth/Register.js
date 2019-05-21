@@ -17,18 +17,16 @@ function Register(props){
         if(password !== confirmPassword){
             alert('Password do not match')
         } else {
-            axios.post('/register', user).then(res => {
+            axios.post('/auth/register', user).then(res => {
                 if(res.data.message){
                     alert(res.data.message)
                 } else if (res.data.user) {
-                    // console.log()
                     props.updateUser(res.data.user)
                     props.history.push('/dashbaord')
                 }
-                console.log(res)
             })
         }
-    }
+    };
     
     return (
         <div>
@@ -47,7 +45,7 @@ function Register(props){
             </div>
         </div>
     )
-}
+};
 
 const mapStateToProps = (state) => {
     return state

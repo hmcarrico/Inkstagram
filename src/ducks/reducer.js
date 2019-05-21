@@ -15,6 +15,6 @@ export default function reducer(state = initialState, action){
 export function updateUser(user){
     return {
         type: UPDATE_USER,
-        payload: user.user
+        payload: user
     }
 }

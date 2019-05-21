@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {updateUser} from '../../ducks/reducer';
@@ -13,8 +13,7 @@ function Login(props){
             username,
             password
         }
-        axios.post('/login', user).then(res => {
-            console.log(res)
+        axios.post('/auth/login', user).then(res => {
             if(res.data.message){
                 alert(res.data.message)
             } else if (res.data.user) {
@@ -23,11 +22,6 @@ function Login(props){
             }
         })
     }
-
-    useEffect(() => {
-        console.log(props.user)
-    //   props.updateUser({hello: 'hello'}
-    }, [props.user])
     
     return (
         <div>
