@@ -1,0 +1,10 @@
+$primary: rgba(15, 12, 11, 0.99);
+$text-color: rgb(255, 255, 255);
+
+.header-size {
+    height: 70px;
+    width: 100%;
+    background: $primary;
+    color: $text-color;
+    position: fixed;
+}

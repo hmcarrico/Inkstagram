@@ -2,9 +2,10 @@ import React, {useEffect} from 'react';
 import {updateUser} from '../../ducks/reducer';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import './Header.scss';
 
 function Header(props){
-    const user = props.user;
+    const {user} = props;
     useEffect(() => {
         axios.get('/auth/session').then(res => {
             props.updateUser(res.data)
@@ -12,8 +13,8 @@ function Header(props){
     }, [user]);
 
     return (
-        <div>
-        Header
+        <div className='black header-size'>
+        Inkstagram
         </div>
     )
 }

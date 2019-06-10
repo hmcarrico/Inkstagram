@@ -1,13 +1,15 @@
 import React from 'react';
 import routes from './routes';
 import Header from './Components/Header/Header';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      {routes}
+      <div className='push-top'>
+        {routes}
+      </div>
     </div>
   );
 }

@@ -3,8 +3,8 @@ const massive = require('massive');
 const session = require('express-session');
 require('dotenv').config();
 //File Imports
-const authController = require('./contollers/authController');
-const postContoroller = require('./contollers/postController');
+// const authController = require('./contollers/authController');
+// const postContoroller = require('./contollers/postController');
 
 const app = express();
 
@@ -14,17 +14,6 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
 }));
-
-//Auth
-app.post('/auth/register', authController.register);
-app.post('/auth/login', authController.login);
-app.post('/auth/logout', authController.logout);
-app.get('/auth/session', authController.getSession);
-
-//Posts Endpoints
-app.get('/api/getAllPosts', postContoroller.getAllPosts);
-app.get('/api/getOnePosts/:id', postContoroller.getOnePost);
-app.post('/api/createPost', postContoroller.createPost);
 
 massive(process.env.CONNECTION_STRING).then(db => {
     console.log('connected to db');
