@@ -18,10 +18,6 @@ function Home(props){
             }
         </div>
     )
-};
+}
 
-const mapStateToProps = (state) => {
-    return state
-};
-
-export default withRouter(connect(mapStateToProps, null)(Home));
+export default withRouter(Home);

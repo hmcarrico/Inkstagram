@@ -1,6 +1,4 @@
 import React, {useEffect} from 'react';
-import {updateUser} from '../../ducks/reducer';
-import {connect} from 'react-redux';
 import axios from 'axios';
 import './Header.scss';
 
@@ -19,12 +17,4 @@ function Header(props){
     )
 }
 
-const mapStateToProps = (state) => {
-    return state
-}
-
-const mapDispatchToProps = {
-    updateUser
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

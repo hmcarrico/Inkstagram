@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {updateUser} from '../../ducks/reducer';
 import axios from 'axios';
 
 function Register(props){
@@ -47,12 +46,4 @@ function Register(props){
     )
 };
 
-const mapStateToProps = (state) => {
-    return state
-};
-
-const mapDispatchToProps = {
-    updateUser
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register));
+export default withRouter(Register);
