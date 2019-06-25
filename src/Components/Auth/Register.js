@@ -1,47 +1,71 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
+import firebase from '../../firebase';
 import axios from 'axios';
 
 function Register(props){
-    const [username, inputUsername] = useState('');
-    const [password, inputPassword] = useState('');
-    const [confirmPassword, reInputPassword] = useState('');
+    const [number, inputNumber] = useState('');
+    const [verify, updateVerify] = useState(false);
+    const [ready, setReady] = useState(false);
+
+    useEffect(() => {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha-container")
+    setReady(true)
+    }, ready)
 
     const registerUser = () => {
-        const user = {
-            username,
-            password
-        }
-        if(password !== confirmPassword){
-            alert('Password do not match')
-        } else {
-            axios.post('/auth/register', user).then(res => {
-                if(res.data.message){
-                    alert(res.data.message)
-                } else if (res.data.user) {
-                    props.updateUser(res.data.user)
-                    props.history.push('/dashbaord')
-                }
+        const appVerifier = window.recaptchaVerifier;
+            firebase
+            .auth()
+            .signInWithPhoneNumber(number, appVerifier)
+            .then(confirmResult => {
+                console.log(confirmResult)
+                // updateVerify(confirmResult.verificationId)
+
+
+                // let code = prompt('Enter code:')
+                // return confirmationResult.confirm(code)
+                // window.confirmationResult = confirmationResult;
+                // firebase.signInWithPhoneNumber(email, appVerifier)
             })
         }
-    };
+
+
+        const finish = (code) => {
+            firebase.auth.PhoneAuthProvider.credential(verify, code)
+        }
+
+
+
+console.log('verify', verify)
+
+
+            // let code = prompt('Enter code:')
+            //     code()
+            //     if(code){
+            //     firebase.auth.PhoneAuthProvider.credential(confirmResult.verificationId, code)
+
     
     return (
         <div>
             <h1>Register</h1>
+            { 
+                verify === true ?
+                <div>
+                    +12345678910
+                    Phone Number:
+                    <input onChange={(e) => inputNumber(e.target.value)}/>
+                    <button onClick={() => registerUser()}>Submit</button>
+                </div>
+            :
             <div>
-                Username: <input onChange={(e) => inputUsername(e.target.value)}/>
+                123456
+                Enter Code:
+                <input onChange={(e) => updateVerify(e.target.value)}/>
+                <button onClick={() => finish()}>Submit</button>
             </div>
-            <div>
-                Password: <input onChange={(e) => inputPassword(e.target.value)}/>
-            </div>
-            <div>
-                Re-Enter Password: <input onChange={(e) => reInputPassword(e.target.value)}/>
-            </div>
-            <div>
-                <button onClick={() => registerUser()}>Submit</button>
-            </div>
+            }
+            <div id="recaptcha-container"></div>
         </div>
     )
 };
