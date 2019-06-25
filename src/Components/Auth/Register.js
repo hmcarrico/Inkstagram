@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import firebase from '../../firebase';
-import axios from 'axios';
+// import axios from 'axios';
 
 function Register(props){
     const [number, inputNumber] = useState('');
     const [verify, updateVerify] = useState(false);
+    const [code, updateCode] = useState()
     const [ready, setReady] = useState(false);
+    const [confirmMe, updateConfirm] = useState()
 
     useEffect(() => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha-container")
@@ -19,50 +21,38 @@ function Register(props){
             .auth()
             .signInWithPhoneNumber(number, appVerifier)
             .then(confirmResult => {
-                console.log(confirmResult)
-                // updateVerify(confirmResult.verificationId)
-
-
-                // let code = prompt('Enter code:')
-                // return confirmationResult.confirm(code)
-                // window.confirmationResult = confirmationResult;
-                // firebase.signInWithPhoneNumber(email, appVerifier)
+                updateConfirm({confirmFunction: confirmResult})
+                updateVerify(confirmResult.verificationId)
             })
         }
 
 
         const finish = (code) => {
-            firebase.auth.PhoneAuthProvider.credential(verify, code)
+            console.log(code.toString())
+            console.log(confirmMe.confirmFunction.confirm)
+            confirmMe.confirmFunction.confirm(code).then(res => {
+                console.log(res)
+            })
         }
 
-
-
-console.log('verify', verify)
-
-
-            // let code = prompt('Enter code:')
-            //     code()
-            //     if(code){
-            //     firebase.auth.PhoneAuthProvider.credential(confirmResult.verificationId, code)
-
-    
     return (
         <div>
             <h1>Register</h1>
+            {console.log('verify', verify)}
             { 
-                verify === true ?
+                verify ?
                 <div>
-                    +12345678910
-                    Phone Number:
-                    <input onChange={(e) => inputNumber(e.target.value)}/>
-                    <button onClick={() => registerUser()}>Submit</button>
-                </div>
+                    123456
+                    Enter Code:
+                    <input onChange={(e) => updateCode(e.target.value)}/>
+                    <button onClick={() => finish(code)}>Submit</button>
+                    </div>
             :
             <div>
-                123456
-                Enter Code:
-                <input onChange={(e) => updateVerify(e.target.value)}/>
-                <button onClick={() => finish()}>Submit</button>
+                +12345678910
+                Phone Number:
+                <input onChange={(e) => inputNumber(e.target.value)}/>
+                <button onClick={() => registerUser()}>Submit</button>
             </div>
             }
             <div id="recaptcha-container"></div>

@@ -4,11 +4,11 @@ import './Header.scss';
 
 function Header(props){
     const {user} = props;
-    useEffect(() => {
-        axios.get('/auth/session').then(res => {
-            props.updateUser(res.data)
-        })
-    }, [user]);
+    // useEffect(() => {
+    //     axios.get('/auth/session').then(res => {
+    //         props.updateUser(res.data)
+    //     })
+    // }, [user]);
 
     return (
         <div className='black header-size'>

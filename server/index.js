@@ -30,9 +30,6 @@ app.post("/api/post", postContoroller.createPost);
 // Auth Endpoints
 app.post("/auth/register", authController.register);
 
-function hi() {
-  console.log("ehhl");
-}
 
 const port = 4090;
 app.listen(port, () => console.log(`listening on port ${port}`));

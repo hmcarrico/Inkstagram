@@ -5,12 +5,12 @@ import axios from 'axios'
 import './App.scss';
 
 class App extends React.Component{
-  componentDidMount(){
-    axios.get('/api/getpost').then(res => {
-      console.log(res.data)
-      console.log('HELLO')
-    })
-  }
+  // componentDidMount(){
+  //   axios.get('/api/getpost').then(res => {
+  //     console.log(res.data)
+  //     console.log('HELLO')
+  //   })
+  // }
   render(){
   return (
     <div className="App">

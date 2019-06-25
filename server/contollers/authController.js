@@ -15,11 +15,7 @@ module.exports = {
         const postRef = db.ref("users");
         const { username, password } = req.body;
         console.log(postRef.child(username))
-        // postRef.orderByKey()
-        //     .equalTo($stateParams.codeId)
-        //         .once('value', function(snap) {
-        //         console.log(snap.val()); // returns `null`
-        //         })
+
         // db.find_user([username]).then(users => {
         // if (users.length) {
         //     bcrypt.compare(password, users[0].password).then(passwordsMatch => {
